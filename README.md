@@ -1,5 +1,7 @@
 # KMIP Server for Synology DSM
 
+**NOTE: For some reason this approach stopped working with the release candidate of 7.2. I am working on a solution.**
+
 This container implements a private KMIP server for Synology DSM to store
 Encryption Key Vault. By default, DSM will offer you to store your vault on the
 same disks where you have encrypted data, which is a big security risk, or to
