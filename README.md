@@ -152,7 +152,7 @@ Partition 2 has been deleted.
 6. Create a new partition. Make sure to start new partion exactly on the same
 sector where the old one was. Decide how much space do you want to leave for the
 encrypted storage, and enter this in the `Last sector` with the minus sign, in
-the example below I left 8 gigabytes and the end of the disk:
+the example below I left 8 gigabytes at the end of the disk:
 ```
 Command (m for help): n
 Partition type
