@@ -1,7 +1,5 @@
 # KMIP Server for Synology DSM
 
-**NOTE: For some reason this approach stopped working with the release candidate of 7.2. I am working on a solution.**
-
 This container implements a private KMIP server for Synology DSM to store
 Encryption Key Vault. By default, DSM will offer you to store your vault on the
 same disks where you have encrypted data, which is a big security risk, or to
@@ -10,6 +8,9 @@ for most of setups. This KMIP server is very easy to use and can be started on a
 small Raspberry Pi like computer, where you will have your own way of protecting
 KMIP server itself, for example store it on LUKS partition and do not automount
 it on reboots.
+
+Minumum version of Synology DSM that works correctly with this KMIP server is
+DSM 7.2-64570.
 
 Based on [PyKMIP](https://github.com/OpenKMIP/PyKMIP) project.
 
