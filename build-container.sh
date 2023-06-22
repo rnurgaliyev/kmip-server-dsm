@@ -13,4 +13,4 @@ fi
 
 WORKDIR=$(cd -- "$(dirname -- "$0")" && pwd)
 
-$CM build -t dsm-kmip-server:latest $WORKDIR
+$CM build -t dsm-kmip-server:latest "$WORKDIR"
