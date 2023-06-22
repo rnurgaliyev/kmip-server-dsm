@@ -22,6 +22,6 @@ fi
 echo "=== Starting new container"
 $CM run -d --name dsm-kmip-server -p 5696:5696 \
     --restart=unless-stopped \
-    --mount type=bind,source=$WORKDIR/state,target=/var/lib/state \
-    --mount type=bind,source=$WORKDIR/certs,target=/var/lib/certs \
+    --mount type=bind,source="$WORKDIR"/state,target=/var/lib/state \
+    --mount type=bind,source="$WORKDIR"/certs,target=/var/lib/certs \
     dsm-kmip-server:latest
