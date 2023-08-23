@@ -1,7 +1,7 @@
 FROM alpine:3.17
 
 RUN apk add --no-cache py3-pip openssl \
-    python3-dev openssl-dev libffi-dev musl-dev gcc
+    python3-dev openssl-dev libffi-dev musl-dev gcc rust cargo
 
 RUN pip install pykmip
 
