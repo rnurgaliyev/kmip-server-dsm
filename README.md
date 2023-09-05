@@ -1,24 +1,24 @@
 # KMIP Server for Synology DSM
 
-This container implements a private KMIP server for Synology DSM to store
-Encryption Key Vault. By default, DSM will offer you to store your vault on the
-same disks where you have encrypted data, which is a big security risk, or to
-store it on another Synology NAS somewhere online, which may not be convenient
-for most of setups. This KMIP server is very easy to use and can be started on a
-small Raspberry Pi like computer, where you will have your own way of protecting
-KMIP server itself, for example store it on LUKS partition and do not automount
-it on reboots.
+This container implements a private KMIP server for Synology DSM to store the
+Encryption Key Vault. By default, DSM offers you to store your vault on the same
+hard drives where you have encrypted data, which is a big security risk, or to
+store it on another Synology NAS somewhere online, which might not be convenient
+for most setups. This KMIP server is very easy to use and can be started on a
+small computer like Raspberry Pi, where you can have your own way to protect the
+KMIP server itself, for example, store it on LUKS partition and do not
+automatically mount it on reboot.
 
-Minumum version of Synology DSM that works correctly with this KMIP server is
+The minimum version of Synology DSM that works properly with this KMIP server is
 DSM 7.2-64570.
 
 Based on [PyKMIP](https://github.com/OpenKMIP/PyKMIP) project.
 
 ## Installation
 
-You will need a Linux computer/board/VM with Git, and Podman or Docker. There
-are no other requirements. This container does not pollute your system, and only
-touches files in the directory where it was started from.
+You will need a Linux computer/board/VM running Git, and Podman or Docker. There
+are no other requirements. This container does not pollute your system and only
+touches files in the directory it was launched from.
 
 1. Clone this repository
 ```
@@ -31,9 +31,9 @@ $ cd kmip-server-dsm
 $ vim ./config.sh
 ```
 
-3. Build the container. I do not provide any binary images since you don't want
-to entrust your secrets to unknown binaries. Insted, study the content of this
-repository to feel good about it, and build yourself a KMIP server:
+3. Build the container. I don't provide binary images because you don't want to
+trust your secrets to unknown binaries. Instead, study the contents of this
+repository to feel comfortable, and build a KMIP server yourself
 ```
 $ ./build-container.sh
 ```
@@ -44,18 +44,18 @@ $ ./run-container.sh
 ```
 
 ## Where is my data stored?
-All keys and certificates will be stored in the `certs` directory, and KMIP
-database itself in the `state` directory. Both of these directories are mounted
-into KMIP server container. You may stop and remove running container, but your
-certificates and data will not be lost. It is in your interest to keep this
-repository with these directories in a safe place - for example in encrypted
-file system or RAM disk. You can always wipe contents of these directories and
-start from scratch, if you have recovery keys for your NAS volumes.
+All keys and certificates are stored in the `certs` directory, and the KMIP
+database itself is stored in the `state` directory. Both directories are mounted
+in the KMIP server container. You can stop and remove a running container, but
+your certificates and data will not be lost. It is in your best interest to keep
+this repository with these directories in a safe place, such as an encrypted
+file system or RAM disk. You can always wipe the contents of these directories
+and start from scratch if you have recovery keys for your NAS volumes.
 
 ## Synology DSM configuration
-Shortly after starting container for the first time, some SSL keys and
-certificates will be generated in the `certs` directory. You will need to copy
-these files to put them into your NAS:
+Shortly after the container is started for the first time, some SSL keys and
+certificates in the `certs` directory. You will need to copy these files to your
+NAS:
 
 * client.key
 * client.crt
@@ -63,16 +63,16 @@ these files to put them into your NAS:
 
 Connect to your DSM web interface and go to Control Panel -> Security ->
 Certificate. Click `Add`, then `Add a new certificate`, enter `KMIP` in the
-`Description` field, then `Import certificate`. Choose `client.key` file for
-`Private key`, `client.crt` for `Certificate`, and `ca.crt` for
-`Intermediate certificate`. Then click `Settings`, and choose newly imported
-certificate for `KMIP`.
+`Description` field, then `Import certificate`. Select the file `client.key` for
+`Private Key`, `client.crt` for `Certificate` and `ca.crt` for `Intermediate
+Certificate`. Then click on `Settings` and select the newly imported certificate
+for `KMIP`.
 
-Switch to the `KMIP` tab, and configure `Remote Key Client`. Hostname is the
-address of this KMIP server, port is 5696, and choose `ca.crt` file another time
+Switch to the 'KMIP' tab and configure the 'Remote Key Client'. Hostname is the
+address of this KMIP server, port is 5696, and select the `ca.crt` file again
 for `Certificate Authority`.
 
-You should now have fully working remote Encryption Key Vault.
+You should now have a fully functional remote Encryption Key Vault.
 
 ## Troubleshooting
 
@@ -95,9 +95,9 @@ $ cat /var/log/pykmip/server.log
 
 ## Tips on creating encrypted storage on Raspberry Pi
 
-These are tips on how to create an encrypted file system on Raspberry Pi where
-you can store your KMIP server. These steps can be adjusted for any other kind
-of computer or VM.
+These are tips on how to create an encrypted filesystem on Raspberry Pi where
+you can store your KMIP server. These steps can be adapted for any other type of
+computer or VM.
 
 1. Download Ubuntu Server image for Raspebby Pi from the 
 [Ubuntu website](https://ubuntu.com/download/raspberry-pi).
@@ -149,10 +149,10 @@ Partition number (1,2, default 2): 2
 Partition 2 has been deleted.
 ```
 
-6. Create a new partition. Make sure to start new partion exactly on the same
-sector where the old one was. Decide how much space do you want to leave for the
-encrypted storage, and enter this in the `Last sector` with the minus sign, in
-the example below I left 8 gigabytes at the end of the disk:
+6. Create a new partition. Make sure you start the new partition on the same
+sector where the old one was. Decide how much space you want to leave for the
+encrypted storage and enter it in the `Last sector` with a minus sign, in the
+example below I left 8 gigabytes at the end of the disk:
 ```
 Command (m for help): n
 Partition type
@@ -170,7 +170,7 @@ Do you want to remove the signature? [Y]es/[N]o: No
 
 Command (m for help): 
 ```
-Make sure to answer NO when you are asked if you want to wipe existing file 
+Be sure to answer NO when you are asked if you want to remove the existing file
 system signature.
 
 7. Now create the last partition, that you will use for your encrypted storage.
@@ -192,8 +192,9 @@ Created a new partition 3 of type 'Linux' and of size 8 GiB.
 Command (m for help): 
 ```
 
-8. Now you have an SD card with boot, root, and encrypted partition. Check if
-everything looks fine and write changes to disk:
+8. Now you have an SD card with boot, root, and data partition, which you will
+use later for an encrypted file system. Check that everything looks good and
+write the changes to disk:
 ```
 Command (m for help): p
 Disk /dev/sdc: 58,63 GiB, 62948114432 bytes, 122945536 sectors
@@ -216,7 +217,7 @@ Syncing disks.
 ```
 
 9. Last step before booting your Raspberry Pi with this SD card is to expand
-root partition:
+root file system:
 ```
 $ sudo resize2fs /dev/sdc2
 resize2fs 1.47.0 (5-Feb-2023)
@@ -224,9 +225,8 @@ Resizing the filesystem on /dev/sdc2 to 13205248 (4k) blocks.
 The filesystem on /dev/sdc2 is now 13205248 (4k) blocks long.
 ```
 
-10. Boot your Raspberry Pi and make basic initial setup. Check if you can see
-the third partition that you created above, and confirm that it is not mounted
-anywhere:
+10. Boot your Raspberry Pi and do a basic initial setup. Check that you can see
+the third partition you created above and make sure it is not mounted anywhere:
 ```
 $ lsblk
 NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
@@ -286,13 +286,13 @@ tmpfs                5.0M     0  5.0M   0% /run/lock
 tmpfs                781M   80K  781M   1% /run/user/1001
 /dev/mapper/myvault  7.3G   24K  6.9G   1% /mnt
 ```
-Now you can clone this repository into a protected storage on your Raspberry Pi.
-This filesystem will not be autounsealed after reboot, and you will have to
-unseal it using password and mount it. After this, you just start the KMIP
-server container again with `run-container.sh`. 
+Now you can clone this repository to a protected space on your Raspberry Pi.
+This file system will not be automatically unsealed after reboot, and you will
+need to unseal it with a password and mount it. After that, just restart the
+KMIP server container with `run-container.sh`.
 
 ## Disclaimer
 
-Everything in this repository provided to you "AS IS". I am not affiliated with
-Synology or PyKMIP project. I do not take any responsibility for any lost data
-or security issues.
+Everything in this repository is provided to you "as is". I am not affiliated
+with Synology or the PyKMIP project. I take no responsibility for lost data or
+security issues.
