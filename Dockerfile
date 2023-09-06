@@ -1,9 +1,11 @@
 FROM alpine:3.17
 
-RUN apk add --no-cache py3-pip openssl \
-    python3-dev openssl-dev libffi-dev musl-dev gcc rust cargo
+RUN apk add --no-cache py3-pip openssl
 
-RUN pip install pykmip
+RUN apk add --no-cache --virtual build-deps \
+    python3-dev openssl-dev libffi-dev musl-dev gcc rust cargo && \
+    pip install pykmip && \
+    apk del build-deps
 
 RUN mkdir -p /etc/pykmip \
     mkdir -p /etc/pykmip/policy \
