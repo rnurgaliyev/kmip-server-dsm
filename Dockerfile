@@ -1,10 +1,10 @@
-FROM alpine:3.17
+FROM alpine:3.19
 
 RUN apk add --no-cache py3-pip openssl
 
 RUN apk add --no-cache --virtual build-deps \
     python3-dev openssl-dev libffi-dev musl-dev gcc rust cargo && \
-    pip install pykmip && \
+    pip install pykmip --break-system-packages && \
     apk del build-deps
 
 RUN mkdir -p /etc/pykmip \
