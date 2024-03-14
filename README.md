@@ -31,16 +31,25 @@ $ cd kmip-server-dsm
 $ vim ./config.sh
 ```
 
-3. Build the container. I don't provide binary images because you don't want to
+### Building and runnning container manually
+
+1. Build the container. I don't provide binary images because you don't want to
 trust your secrets to unknown binaries. Instead, study the contents of this
 repository to feel comfortable, and build a KMIP server yourself
 ```
-$ ./build-container.sh
+2 ./build-container.sh
 ```
 
-4. Run the container
+3. Run the container
 ```
 $ ./run-container.sh
+```
+
+### Using docker-compose
+
+Alternatively, you can use docker-compose to build and run the container:
+```
+$ docker-compose up -d
 ```
 
 ## Where is my data stored?
