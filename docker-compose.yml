@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  kmip-server-dsm:
+    build:
+      context: .
+    ports:
+      - 5696:5696
+    volumes:
+      - type: bind
+        source: ./state
+        target: /var/lib/state
+      - type: bind
+        source: ./certs
+        target: /var/lib/certs
