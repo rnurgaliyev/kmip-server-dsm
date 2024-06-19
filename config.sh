@@ -24,12 +24,12 @@ SERVER_CERT_LIFETIME=1095 # (days)
 # losing KMIP data.
 # 
 # If you have local DNS in your environment, syntax is following:
-# SERVER_NAME=DNS:<fully qualified hostname of this KMIP server>
-# CLIENT_NAME=DNS:<fully qualified hostname of Synology NAS>
+# SSL_SERVER_NAME=DNS:<fully qualified hostname of this KMIP server>
+# SSL_CLIENT_NAME=DNS:<fully qualified hostname of Synology NAS>
 #
 # Otherwise, you can configure static IP addresses:
-# SERVER_NAME=IP:<IP address of this KMIP server>
-# CLIENT_NAME=IP:<IP address of Synology NAS>
+# SSL_SERVER_NAME=IP:<IP address of this KMIP server>
+# SSL_CLIENT_NAME=IP:<IP address of Synology NAS>
 #
 SSL_SERVER_NAME="IP:192.168.255.5"
 SSL_CLIENT_NAME="IP:192.168.255.10"
