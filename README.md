@@ -12,6 +12,9 @@ automatically mount it on reboot.
 The minimum version of Synology DSM that works properly with this KMIP server is
 DSM 7.2-64570.
 
+Latest Synology DSM which was checked to be compatible with this KMIP server is 
+DSM 7.2.2-72806.
+
 Based on [PyKMIP](https://github.com/OpenKMIP/PyKMIP) project.
 
 ## Installation
@@ -33,16 +36,12 @@ $ vim ./config.sh
 
 ### Building and runnning container manually
 
-1. Build the container. I don't provide binary images because you don't want to
-trust your secrets to unknown binaries. Instead, study the contents of this
-repository to feel comfortable, and build a KMIP server yourself
+1. Build and run the container using docker compose. I don't provide binary
+images because you don't want to trust your secrets to unknown binaries.
+Instead, study the contents of this repository to feel comfortable, and build a
+KMIP server yourself.
 ```
-2 ./build-container.sh
-```
-
-3. Run the container
-```
-$ ./run-container.sh
+$ docker compose up -d
 ```
 
 ### Using docker-compose
