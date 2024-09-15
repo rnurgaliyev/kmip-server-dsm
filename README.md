@@ -44,13 +44,6 @@ KMIP server yourself.
 $ docker compose up -d
 ```
 
-### Using docker-compose
-
-Alternatively, you can use docker-compose to build and run the container:
-```
-$ docker-compose up -d
-```
-
 ## Where is my data stored?
 All keys and certificates are stored in the `certs` directory, and the KMIP
 database itself is stored in the `state` directory. Both directories are mounted
