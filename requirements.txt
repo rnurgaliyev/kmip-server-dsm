@@ -1,1 +1,1 @@
-git+https://github.com/OpenKMIP/PyKMIP@6cd44b572b0ca55adf01a8a12078b2284602e64c
+git+https://github.com/OpenKMIP/PyKMIP@v0.10.0
