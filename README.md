@@ -85,13 +85,9 @@ $ sudo journalctl -u kmip.service -ef
 ```
 
 On KMIP server side:
-1. Jump into the container (replace podman with docker if needed):
+1. check logs of the container (replace podman with docker if needed):
 ```
-$ podman exec -ti dsm-kmip-server /bin/sh
-```
-2. Check pykmip logs:
-```
-$ cat /var/log/pykmip/server.log
+$ podman logs -f dsm-kmip-server
 ```
 
 ## Tips on creating encrypted storage on Raspberry Pi
