@@ -57,4 +57,5 @@ if [ ! -f /var/lib/certs/client.crt ]; then
         -days $CLIENT_CERT_LIFETIME -CAcreateserial -copy_extensions copy
 fi
 
-pykmip-server
+# Ensure pykmip-server logs are directed to stdout
+pykmip-server -l /dev/stdout
