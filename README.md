@@ -13,7 +13,7 @@ The minimum version of Synology DSM that works properly with this KMIP server is
 DSM 7.2-64570.
 
 Latest Synology DSM which was checked to be compatible with this KMIP server is 
-DSM 7.2.2-72806.
+DSM 7.3.1-86003.
 
 Based on [PyKMIP](https://github.com/OpenKMIP/PyKMIP) project.
 
